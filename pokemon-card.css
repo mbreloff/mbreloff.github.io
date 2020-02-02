@@ -17,7 +17,13 @@
 .evolvance {
   background-color: white;
 }
-
+.attack-name{
+  padding-left: 27pt;
+}
+.damage {
+  position: absolute;
+  right: 5pt;
+}
 .picture {
   height: 134pt;
   width: 185pt;
