@@ -13,14 +13,27 @@ function setPokemon(pokemon) {
 
 let charmander = {
   name: 'Charmander',
-  hp: 100,
+  hp: 80,
   attack: 'Fire Blast',
-  damage: 50,
+  damage: 40,
   picture: 'images/charmander.png',
   type: 'images/energy_fire.png',
-  background: 'red'
+  background: 'red',
 }
+let bolbusorre = {
+  name: 'bolbusorre',
+  hp: 50,
+  attack: 'vine throe',
+  damage: 30,
+  picture: 'images/bulbasaur.png',
+  type: 'images/energy_grass.png',
+  background: 'green',
+} 
 
 window.setTimeout(() => {
   setPokemon(charmander);
 }, 3000);
+
+window.setTimeout(() => {
+  setPokemon(bolbusorre);
+}, 6000);
