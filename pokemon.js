@@ -28,7 +28,16 @@ let bolbusorre = {
   picture: 'images/bulbasaur.png',
   type: 'images/energy_grass.png',
   background: 'green',
-} 
+}
+let pikachu = {
+  name: 'pikachu',
+  hp: 120,
+  attack: 'thunderbolt',
+  damage: 70,
+  picture: 'images/pikachu.png',
+  type:'images/energy_lightning.png',
+  background: 'yellow',
+}
 
 window.setTimeout(() => {
   setPokemon(charmander);
@@ -37,3 +46,7 @@ window.setTimeout(() => {
 window.setTimeout(() => {
   setPokemon(bolbusorre);
 }, 6000);
+
+window.setTimeout(()=>{
+  setPokemon(pikachu);
+}, 9000);
