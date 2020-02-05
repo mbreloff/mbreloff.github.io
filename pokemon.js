@@ -38,6 +38,15 @@ let pikachu = {
   type:'images/energy_lightning.png',
   background: 'yellow',
 }
+let squirtle = {
+  name: 'squirtle',
+  hp: 100,
+  attack: 'woter blast',
+  damage: 50,
+  picture: 'images/squirtle.png',
+  type: 'images/energy_water.png',
+  background: 'blue',
+}  
 
 window.setTimeout(() => {
   setPokemon(charmander);
@@ -50,3 +59,9 @@ window.setTimeout(() => {
 window.setTimeout(()=>{
   setPokemon(pikachu);
 }, 9000);
+
+window.setTimeout(() => {
+  setPokemon(squirtle);
+}, 10000);
+                                         
+                  
