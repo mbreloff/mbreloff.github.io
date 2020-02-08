@@ -1,0 +1,20 @@
+.problem {
+  width: 100pt;
+  position: absolute;
+  right: 50pt;
+}
+
+.number, .op-line {
+  font-size: 30pt;
+  text-align: right;
+}
+
+.op-line {
+  border-bottom: 2pt solid black;
+}
+
+#go {
+  border: 1pt solid black;
+  background: green;
+  margin: auto;
+}
