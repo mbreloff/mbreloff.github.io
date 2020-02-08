@@ -7,6 +7,12 @@
   border-radius: 10pt;
   position: absolute;
 }
+#name-list {
+  color: aqua;
+  cursor: pointer;
+  position: absolute;
+  right: 10pt; 
+}
 
 .HPand60 {
   position: absolute;

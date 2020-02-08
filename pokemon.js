@@ -11,6 +11,16 @@ function setPokemon(pokemon) {
   document.querySelectorAll('.card').item(0).style.backgroundColor= pokemon.background;
 }
 
+let ekans = {
+  name: 'Ekans',
+  hp: 60,
+  attack: 'Tail whap',
+  damage: 30,
+  picture: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/023.png',
+  type: 'images/energy_psychic.png',
+  background: '#9871a3'
+}
+
 let charmander = {
   name: 'Charmander',
   hp: 80,
@@ -46,14 +56,42 @@ let squirtle = {
   picture: 'images/squirtle.png',
   type: 'images/energy_water.png',
   background: 'blue',
-}  
+}
+let staryu = {
+  name: 'staryu',
+  hp:  50,
+  attack: 'splash',
+  damage: 10,
+  picture: 'images/staryu.png',
+  type: 'images/energy_water.png',
+  background: 'blue',
+}
 
+
+let cards = [
+  ekans,
+  charmander,
+  staryu,
+  bolbusorre,
+  pikachu,
+  squirtle,
+]
+
+cards.forEach(card => {
+  let nameLink = document.createElement('div');
+  nameLink.className = 'name-link';
+  nameLink.innerHTML = card.name;
+  nameLink.onclick = () => setPokemon(card);
+  document.querySelectorAll('#name-list')[0].appendChild(nameLink);
+})
+
+/*
 window.setTimeout(() => {
   setPokemon(charmander);
 }, 3000);
 
 window.setTimeout(() => {
-  setPokemon(bolbusorre);
+  setPokemon(staryu);
 }, 6000);
 
 window.setTimeout(()=>{
@@ -63,5 +101,5 @@ window.setTimeout(()=>{
 window.setTimeout(() => {
   setPokemon(squirtle);
 }, 10000);
-                                         
+*/                                       
                   
