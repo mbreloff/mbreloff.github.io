@@ -13,8 +13,13 @@
   border-bottom: 2pt solid black;
 }
 
+#timer {
+  font-size: 16pt;
+}
+
 #go {
   border: 1pt solid black;
   background: green;
   margin: auto;
+  cursor: pointer;
 }

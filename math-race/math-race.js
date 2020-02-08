@@ -27,6 +27,7 @@ function go() {
   goButton.style.background = 'red'
   answers.innerHTML = ''
   answersHeader.innerHTML = 'Answers: 0'
+  numAnswers = 0
   newProblem();
 }
 
@@ -46,10 +47,11 @@ function setTimer() {
 let target = 'kljfhdlkjhfdsljkh';
 let curr = '';
 let numAnswers = 0;
+let maxNum = 5;
 
 function newProblem() {
-  let n1 = Math.round(Math.random() * 10);
-  let n2 = Math.round(Math.random() * 10);
+  let n1 = Math.round(Math.random() * maxNum);
+  let n2 = Math.round(Math.random() * maxNum);
   number1.innerHTML = n1;
   number2.innerHTML = n2;
   curr = '';
