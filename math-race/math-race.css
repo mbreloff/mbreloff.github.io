@@ -14,12 +14,19 @@
 }
 
 #timer {
-  font-size: 16pt;
+  font-size: 24pt;
 }
 
 #go {
   border: 1pt solid black;
   background: green;
-  margin: auto;
   cursor: pointer;
+  padding: 30pt;
+/*  margin: 5pt;*/
+  font-size: 30pt;
+  position: absolute;
+/*  right: 45%;*/
+  left: 45%;
+  top: 45%;
+/*  bottom: 45%;*/
 }
