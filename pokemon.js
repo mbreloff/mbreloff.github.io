@@ -66,6 +66,15 @@ let staryu = {
   type: 'images/energy_water.png',
   background: 'blue',
 }
+let sandchru = {
+  name: 'sandchru',
+  hp: 90,
+  attack: 'splits',
+  damage: 100,
+  picture: 'images/sandchru.png',
+  type: 'images/energy_ground.png',
+  background: 'tan',
+} 
 
 
 let cards = [
@@ -75,6 +84,7 @@ let cards = [
   bolbusorre,
   pikachu,
   squirtle,
+  sandchru,
 ]
 
 cards.forEach(card => {
