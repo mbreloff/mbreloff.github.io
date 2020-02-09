@@ -72,7 +72,7 @@ let sandchru = {
   attack: 'splits',
   damage: 100,
   picture: 'images/sandchru.png',
-  type: 'images/energy_ground.png',
+  type: 'images/energy_grass.png',
   background: 'tan',
 } 
 
