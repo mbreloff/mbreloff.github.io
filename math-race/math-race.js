@@ -2,7 +2,7 @@ let timer = document.querySelectorAll('#timer')[0];
 let goButton = document.querySelectorAll('#go')[0];
 let number1 = document.querySelectorAll('#number1')[0];
 let number2 = document.querySelectorAll('#number2')[0];
-let op = document.querySelectorAll('#op')[0];
+let opdiv = document.querySelectorAll('#op')[0];
 let answer = document.querySelectorAll('#answer')[0];
 let answers = document.querySelectorAll('#answers')[0];
 let answersHeader = document.querySelectorAll('#answersHeader')[0];
@@ -47,17 +47,33 @@ function setTimer() {
 let target = 'kljfhdlkjhfdsljkh';
 let curr = '';
 let numAnswers = 0;
+let op = '+';
 let maxNum = 5;
+
+document.querySelectorAll('#num-select')[0].onchange = e => {
+  console.log(e)
+  maxNum = parseInt(e.target.options[e.target.selectedIndex].value);
+  console.log(maxNum)
+}
+document.querySelectorAll('#op-select')[0].onchange = e => {
+  console.log(e)
+  op = e.target.options[e.target.selectedIndex].text;
+  opdiv.innerHTML = op;
+  console.log(op)
+}
 
 function newProblem() {
   let n1 = Math.round(Math.random() * maxNum);
-  let n2 = Math.round(Math.random() * maxNum);
+  let n2 = Math.round(Math.random() * (op == '-' ? n1 : maxNum));
   number1.innerHTML = n1;
   number2.innerHTML = n2;
   curr = '';
-  if (op.innerHTML == '+') {
+  if (op == '+')
     target = (n1 + n2).toString();
-  }
+  else if (op == '-')
+    target = (n1 - n2).toString();
+  else if (op == '*')
+    target = (n1 * n2).toString();
 }
 newProblem();
 
