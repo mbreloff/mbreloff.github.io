@@ -51,21 +51,21 @@ let op = '+';
 let maxNum = 5;
 
 document.querySelectorAll('#num-select')[0].onchange = e => {
-  console.log(e)
   maxNum = parseInt(e.target.options[e.target.selectedIndex].value);
-  console.log(maxNum)
+  newProblem();
 }
 document.querySelectorAll('#op-select')[0].onchange = e => {
-  console.log(e)
   op = e.target.options[e.target.selectedIndex].text;
   opdiv.innerHTML = op;
-  console.log(op)
+  newProblem();
 }
 
 function newProblem() {
   let n1 = Math.round(Math.random() * maxNum);
+  if (n1 == 0 && (op == '-' || op == '/'))
+    n1 = 1;
   let n2 = Math.round(Math.random() * (op == '-' ? n1 : maxNum));
-  number1.innerHTML = n1;
+  number1.innerHTML = op == '/' ? n1*n2 : n1;
   number2.innerHTML = n2;
   curr = '';
   if (op == '+')
@@ -74,6 +74,8 @@ function newProblem() {
     target = (n1 - n2).toString();
   else if (op == '*')
     target = (n1 * n2).toString();
+  else if (op == '/')
+    target = n1.toString();
 }
 newProblem();
 
@@ -82,13 +84,30 @@ function newChar(c) {
   curr = curr + c.toString();
   if (curr == target) {
     // yay got the answer!
-    let ansDiv = document.createElement('div');
-    ansDiv.innerHTML = `${number1.innerHTML} ${op.innerHTML} ${number2.innerHTML} = ${curr}`
-    answers.appendChild(ansDiv);
-    numAnswers++;
-    answersHeader.innerHTML = 'Answers: ' + numAnswers;
+    answer.style.color = 'black';
+    addAnswer();
     newProblem();
   }
+  else if (curr.length >= target.length) {
+    // answer is wrong
+    answer.style.color = 'red';
+  }
+}
+
+function addAnswer() {
+  // create a div to hold the full: 4 + 1 = 5
+  let ansDiv = document.createElement('div');
+  ansDiv.innerHTML = `${number1.innerHTML} ${op} ${number2.innerHTML} = ${curr}`;
+  
+  // the answer-right class has an animation attached
+  // to change the color and position.
+  // remove the class when the animation is done.
+  ansDiv.className = 'answer-right';
+  ansDiv.addEventListener('animationend', () => ansDiv.className = '')
+  answers.appendChild(ansDiv);
+  
+  numAnswers++;
+  answersHeader.innerHTML = 'Answers: ' + numAnswers;
 }
       
 function deleteChar() {
@@ -107,3 +126,16 @@ window.onkeydown = e => {
   else if (key == 8) // backspace
     deleteChar();
 }
+
+// keypad
+document.querySelectorAll('#key0')[0].onclick = () => newChar(0);
+document.querySelectorAll('#key1')[0].onclick = () => newChar(1);
+document.querySelectorAll('#key2')[0].onclick = () => newChar(2);
+document.querySelectorAll('#key3')[0].onclick = () => newChar(3);
+document.querySelectorAll('#key4')[0].onclick = () => newChar(4);
+document.querySelectorAll('#key5')[0].onclick = () => newChar(5);
+document.querySelectorAll('#key6')[0].onclick = () => newChar(6);
+document.querySelectorAll('#key7')[0].onclick = () => newChar(7);
+document.querySelectorAll('#key8')[0].onclick = () => newChar(8);
+document.querySelectorAll('#key9')[0].onclick = () => newChar(9);
+document.querySelectorAll('#keydel')[0].onclick = () => deleteChar();

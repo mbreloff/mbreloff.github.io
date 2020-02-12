@@ -22,11 +22,56 @@
   background: green;
   cursor: pointer;
   padding: 30pt;
-/*  margin: 5pt;*/
   font-size: 30pt;
   position: absolute;
-/*  right: 45%;*/
-  left: 45%;
-  top: 45%;
-/*  bottom: 45%;*/
+  right: 10pt;
+  bottom: 10pt;
 }
+
+@keyframes anim-move {
+  from {
+    top: 5pt;
+    left: 50%;
+  }
+  to {
+    top: 20%;
+    left: 5pt;
+  }
+}
+
+.answer-right {
+  position: absolute;
+  color: green;
+  animation-name: anim-move;
+  animation-duration: 3s;
+}
+
+.keypad {
+  position: absolute;
+  top: 30%;
+  left: 35%;
+  width: 30%;
+  height: 40%;
+}
+
+.key {
+  position: absolute;
+  width: 26%;
+  height: 22%;
+  background: lightgreen;
+  font-size: 24pt;
+  cursor: pointer;
+  border: 2px solid black;
+  text-align: center;
+}
+#key0 { left: 35%; top: 80%; }
+#key1 { left:  5%; top:  5%; }
+#key2 { left: 35%; top:  5%; }
+#key3 { left: 65%; top:  5%; }
+#key4 { left:  5%; top: 30%; }
+#key5 { left: 35%; top: 30%; }
+#key6 { left: 65%; top: 30%; }
+#key7 { left:  5%; top: 55%; }
+#key8 { left: 35%; top: 55%; }
+#key9 { left: 65%; top: 55%; }
+#keydel { left: 65%; top: 80%; }
