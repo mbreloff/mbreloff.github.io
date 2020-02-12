@@ -74,7 +74,17 @@ let sandchru = {
   picture: 'images/sandchru.png',
   type: 'images/energy_grass.png',
   background: 'tan',
-} 
+}
+let onix = {
+  name: 'onix',
+  hp:  '110',
+  attack: 'rockblast',
+  damage: 120,
+  picture: 'images/onix.png',
+  type: 'images/energy_rock.png',
+  background: '#5e4d1e',
+  
+}
 
 
 let cards = [
@@ -85,6 +95,7 @@ let cards = [
   pikachu,
   squirtle,
   sandchru,
+  onix,
 ]
 
 cards.forEach(card => {
