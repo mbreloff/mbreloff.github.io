@@ -39,12 +39,12 @@ let bolbusorre = {
   type: 'images/energy_grass.png',
   background: 'green',
 }
-let pikachu = {
-  name: 'pikachu',
+let pikachuGX = {
+  name: 'pikachu GX',
   hp: 120,
   attack: 'thunderbolt',
   damage: 70,
-  picture: 'images/pikachu.png',
+  picture: 'images/pikachu GX.png',
   type:'images/energy_lightning.png',
   background: 'yellow',
 }
@@ -72,7 +72,7 @@ let sandchru = {
   attack: 'splits',
   damage: 100,
   picture: 'images/sandchru.png',
-  type: 'images/energy_grass.png',
+  type: 'images/energy_ground.png',
   background: 'tan',
 }
 let onix = {
@@ -85,6 +85,18 @@ let onix = {
   background: '#5e4d1e',
   
 }
+let kyogerGX  =  {
+  name: 'kyoger GX',
+  hp: '130',
+  attack: 'vortex',
+  damage: '2190',
+  picture: 'images/kyogergX.png',
+  type: 'images/energy_water.png',
+  background: 'lightblue', 
+  
+  
+}
+
 
 
 let cards = [
@@ -92,10 +104,11 @@ let cards = [
   charmander,
   staryu,
   bolbusorre,
-  pikachu,
+  pikachuGX,
   squirtle,
   sandchru,
   onix,
+  kyogerGX,
 ]
 
 cards.forEach(card => {

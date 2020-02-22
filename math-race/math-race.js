@@ -14,7 +14,7 @@ function pad(num, size) {
 }
 
 function timestamp(secs) {
-  let mins = Math.round(secs / 60);
+  let mins = Math.floor(secs / 60);
   let secs2 = secs % 60;
   return pad(mins, 2) + ':' + pad(secs2, 2);
 }
