@@ -39,12 +39,12 @@ let bolbusorre = {
   type: 'images/energy_grass.png',
   background: 'green',
 }
-let pikachuGX = {
-  name: 'pikachu GX',
+let pikachu = {
+  name: 'pikachu',
   hp: 120,
   attack: 'thunderbolt',
   damage: 70,
-  picture: 'images/pikachu GX.png',
+  picture: 'images/pikachu.png',
   type:'images/energy_lightning.png',
   background: 'yellow',
 }
@@ -85,12 +85,12 @@ let onix = {
   background: '#5e4d1e',
   
 }
-let kyogerGX  =  {
+let kyogergx  =  {
   name: 'kyoger GX',
   hp: '130',
   attack: 'vortex',
   damage: '2190',
-  picture: 'images/kyogergX.png',
+  picture: 'images/kyogerGX.png',
   type: 'images/energy_water.png',
   background: 'lightblue', 
   

@@ -20,6 +20,18 @@ function timestamp(secs) {
 }
 
 let start = -1;
+let flashing = false;
+let bg = 'white'
+
+window.setInterval(() => {
+  if (flashing)
+    changeBackground(bg == 'white' ? 'red' : 'white');
+}, 500)
+
+function changeBackground(color) {
+  bg = color
+  timer.style.background = color;
+}
 
 function go() {
   start = new Date().getTime();
@@ -29,12 +41,23 @@ function go() {
   answersHeader.innerHTML = 'Answers: 0'
   numAnswers = 0
   newProblem();
+  window.setTimeout(() => endGame(), 60000)
+  window.setTimeout(() => {
+    flashing = true;
+  }, 50000)
 }
 
 function stop() {
   goButton.innerHTML = 'GO'
   goButton.style.background = 'green'
   start = -1;
+}
+
+function endGame() {
+  stop();
+  flashing = false;
+  changeBackground('white');
+  alert('Congratulations, you got ' + numAnswers + ' answers')
 }
 
 timer.innerHTML = timestamp(0);
@@ -62,9 +85,14 @@ document.querySelectorAll('#op-select')[0].onchange = e => {
 
 function newProblem() {
   let n1 = Math.round(Math.random() * maxNum);
-  if (n1 == 0 && (op == '-' || op == '/'))
+  if (n1 == 0 && (op == '/'))
     n1 = 1;
-  let n2 = Math.round(Math.random() * (op == '-' ? n1 : maxNum));
+  let n2 = Math.round(Math.random() * maxNum);
+  if (op == '-' && n2 > n1) {
+    let tmp = n1;
+    n1 = n2;
+    n2 = tmp;
+  }
   number1.innerHTML = op == '/' ? n1*n2 : n1;
   number2.innerHTML = n2;
   curr = '';
