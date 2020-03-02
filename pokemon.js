@@ -9,6 +9,9 @@ function setPokemon(pokemon) {
   document.querySelectorAll('.picture').item(0).setAttribute('src', pokemon.picture);
   document.querySelectorAll('#type').item(0).setAttribute('src', pokemon.type);
   document.querySelectorAll('.card').item(0).style.backgroundColor= pokemon.background;
+  
+  if (pokemon.evolvance)
+    document.querySelectorAll('.evolvance').item(0).innerHTML = pokemon.evolvance;
 }
 
 let ekans = {
@@ -18,7 +21,8 @@ let ekans = {
   damage: 30,
   picture: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/023.png',
   type: 'images/energy_psychic.png',
-  background: '#9871a3'
+  background: '#9871a3',
+  evolvance: 'BASIC'
 }
 
 let charmander = {
@@ -85,18 +89,26 @@ let onix = {
   background: '#5e4d1e',
   
 }
-let kyogergx  =  {
-  name: 'kyoger GX',
+let kyogregx  =  {
+  name: 'kyogre GX',
   hp: '130',
   attack: 'vortex',
   damage: '2190',
-  picture: 'images/kyogerGX.png',
+  picture: 'images/kyogre.png',
   type: 'images/energy_water.png',
   background: 'lightblue', 
   
   
 }
-
+let growlithe = {
+  name: 'growlithe',
+  hp: '90',
+  attack: 'scrach',
+  damage: '30',
+  picture: 'images/growlithe.png',
+  type: 'images/energy_fire.png',
+  background: 'orange',
+}
 
 
 let cards = [
@@ -104,11 +116,12 @@ let cards = [
   charmander,
   staryu,
   bolbusorre,
-  pikachuGX,
+  pikachu,
   squirtle,
   sandchru,
   onix,
-  kyogerGX,
+  kyogregx,
+  growlithe,
 ]
 
 cards.forEach(card => {
