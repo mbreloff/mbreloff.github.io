@@ -9,9 +9,8 @@ function setPokemon(pokemon) {
   document.querySelectorAll('.picture').item(0).setAttribute('src', pokemon.picture);
   document.querySelectorAll('#type').item(0).setAttribute('src', pokemon.type);
   document.querySelectorAll('.card').item(0).style.backgroundColor= pokemon.background;
-  
-  if (pokemon.evolvance)
-    document.querySelectorAll('.evolvance').item(0).innerHTML = pokemon.evolvance;
+  let evolvance = pokemon.evolvance ? pokemon.evolvance : 'BASIC'
+  document.querySelectorAll('.evolvance').item(0).innerHTML = evolvance;
 }
 
 let ekans = {
@@ -110,6 +109,28 @@ let growlithe = {
   background: 'orange',
 }
 
+let arcanine = {
+  name: 'Arcanine',
+  hp: 120,
+  attack: 'Sharp Fang',
+  damage: 90,
+  picture: 'images/arcanine2.png',
+  type: 'images/energy_fire.png',
+  background: 'orange',
+  evolvance: 'Stage 1',
+}
+let rillabom = {
+  name: 'rillabom',
+  hp:'190',
+  attack: 'drum roll',
+  'drum betinge',
+  damage: '90
+  180',
+  picture: 'images/rillabom.png',
+  type: 'images/energy_gras.png',
+  background: 'green',
+  evolvance: 'stage 2',
+}
 
 let cards = [
   ekans,
@@ -122,6 +143,8 @@ let cards = [
   onix,
   kyogregx,
   growlithe,
+  arcanine,
+  rillabom,
 ]
 
 cards.forEach(card => {
