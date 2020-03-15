@@ -69,41 +69,30 @@ let bodies = [
   ]
 add(bodies);
 
-// the head, ie the main circle that we control
-let circle = new Circle(startx(), starty, 20)
+function rainx() {
+  return render.bounds.min.x + Math.random() * width;
+}
+function rainy() {
+  return render.bounds.min.y - Math.random() * height * 2;
+}
 
-// the base of the walker
-let square = new Square(startx(), starty+150, 70, {
-  friction: 1
-})
+let raindrops = [];
+for (var i=0; i<500; i++) {
+  raindrops.push(new Circle(rainx(), rainy(), 4))
+}
 
-// make a spring constraint attaching head to base
-constraint(circle, square, {
-  length: 200,
-  stiffness: 0.01,
-  damping: 0,
-})
-
-// keep the head attracted to a point above the circle.
-// we update this pos location before every rendering
-let pos = {x: width/2, y: 150};
-constraint(circle, pos, {
-  length: 0,
-  stiffness: 0.0001,
-  damping: 0.08,
-  render: {visible: false},
+let score = 0;
+Events.on(render, 'beforeRender', event => {
+  raindrops.forEach(rd => {
+    if (rd.pos().y > height + 100)
+      Body.setPosition(rd.body, {x: rainx(), y: rainy()})
+  })
 })
 
 // -------------------------------------------
 
-let keyMap = {
-  'ArrowUp': circle.pushup,
-  'ArrowDown': circle.pushdown,
-  'ArrowLeft': circle.pushleft,
-  'ArrowRight': circle.pushright,
-  'f': () => pos.x += 10,
-}
-
+// add keys to keyMap to register callbacks
+let keyMap = {}
 window.onkeydown = e => {
   let key = e.key;
   if (keyMap[key])
@@ -114,29 +103,7 @@ window.onkeydown = e => {
 Engine.run(engine);
 Render.run(render);
 
-Events.on(render, 'beforeRender', event => {
-  // reset the constraint pos to be directly above the base
-  pos.x = square.pos().x;
-  pos.y = Math.min(200, circle.pos().y) - 100;
-  
-  let w2 = width/2;
-  let x = square.body.position.x;
-  Render.lookAt(render, {
-    min: {x: x - w2, y: 0},
-    max: {x: x + w2, y: height}
-  });
-})
 
-Events.on(render, 'afterRender', event => {
-  if (square.pos().y > height + 100) {
-    // game over!
-    let ctx = render.context;
-    ctx.font = "30px Arial";
-    ctx.fillStyle = 'red'
-    ctx.textAlign = 'center'
-    ctx.fillText("Game Over", width/2, height/2);
-  }
-})
 
 function applyForceX(body, force) {
   Body.applyForce(
@@ -154,20 +121,41 @@ function applyForceY(body, force) {
 function Circle(x, y, r, options) {
   this.body = Bodies.circle(x, y, r, options);
   add(this);
+  this.hw = r;
   this.pos = () => this.body.position;
-  let forcex = 0.03;
-  let forcey = 0.1;
-  this.pushup = () => applyForceY(this.body, -forcey);
-  this.pushdown = () => applyForceY(this.body, forcey);
-  this.pushleft = () => applyForceX(this.body, -forcex);
-  this.pushright = () => applyForceX(this.body, forcex);
 }
 function Rect(x, y, w, h, options) {
   this.body = Bodies.rectangle(x, y, w, h, options);
   add(this);
+  this.hw = w/2;
+  this.hh = h/2;
   this.pos = () => this.body.position;
 }
 function Square(x, y, w, options) {
   return new Rect(x, y, w, w, options);
 }
+function Shape(x, y, vertices, options) {
+  this.body = Bodies.fromVertices(x, y, vertices, options);
+  add(this);
+  let minx = 0, miny = 0, maxx = 0, maxy = 0;
+  vertices.forEach(v => {
+    if (v.x < minx)
+      minx = v.x;
+    if (v.x > maxx)
+      maxx = v.x;
+    if (v.y < miny)
+      miny = v.y;
+    if (v.y > maxy)
+      maxy = v.y;
+  })
+  this.hw = (maxx - minx) / 2;
+  this.hh = (maxy - miny) / 2;
+  this.pos = () => this.body.position;
+}
 
+function insideOf(a, b) {
+  let ax = a.pos().x, ay = a.pos().y;
+  let bx = b.pos().x, by = b.pos().y;
+  return ax > bx - b.hw && ax < bx + b.hw
+      && ay > by - b.hh && ay < by + hh;
+}
