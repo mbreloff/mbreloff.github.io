@@ -8,7 +8,7 @@ let circle = new Head(startx(), starty, 10)
 
 let hw = 30; // half-width of bucket
 let hh = 60; // half-height of bucket
-let bw = 5; // thickness
+let bw = 10; // thickness
 let base = new Shape(startx(), starty+150, [
   {x: -hw, y: -hh},
   {x: -hw, y: hh},
@@ -83,24 +83,30 @@ Events.on(render, 'beforeRender', event => {
     max: {x: x + w2, y: height}
   })
   
+  
+})
+
+let best = 0;
+Events.on(render, 'afterRender', event => {
+  
   score = 0
   raindrops.forEach(rd => {
     if (insideOf(rd, base))
       score++;
   })
+  if (score > best)
+    best = score;
   
-})
-
-Events.on(render, 'afterRender', event => {
   let ctx = render.context;
   ctx.font = "30px Arial"
   ctx.fillStyle = 'white'
   ctx.textAlign = 'left'
+  
   ctx.fillText('Score: ' + score, 20, 50)
+  ctx.fillText('Best: ' + best, 20, 100)
   
   if (base.pos().y > height + 100) {
     // game over!
-    let ctx = render.context;
     ctx.font = "30px Arial";
     ctx.fillStyle = 'red'
     ctx.textAlign = 'center'
