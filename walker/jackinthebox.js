@@ -6,9 +6,9 @@ let circle = new Head(startx(), starty, 10)
 //  friction: 1
 //})
 
-let hw = 30; // half-width of bucket
-let hh = 60; // half-height of bucket
-let bw = 10; // thickness
+let hw = 50; // half-width of bucket
+let hh = 40; // half-height of bucket
+let bw = 15; // thickness
 let base = new Shape(startx(), starty+150, [
   {x: -hw, y: -hh},
   {x: -hw, y: hh},
@@ -112,4 +112,42 @@ Events.on(render, 'afterRender', event => {
     ctx.textAlign = 'center'
     ctx.fillText("Game Over", width/2, height/2);
   }
+})
+
+
+
+// ground blocks
+let minx = -500;
+let maxx = width + 5000;
+for (var x=-500; x<width+5000; x+=300) {
+  let r = new Rect(x, height-30, 150, 60, {isStatic: true})
+//  Body.rotate(r.body, 0.3)
+}
+
+//// make some bodies (shapes)
+//let bodies = [
+//    Bodies.rectangle(startx(), starty, 80, 80),
+//    Bodies.circle(startx(), starty+10, 40, 10),
+//    Bodies.circle(startx(), starty, 40, 10)
+//  ]
+//add(bodies);
+
+function rainx() {
+  return render.bounds.min.x + Math.random() * width;
+}
+function rainy() {
+  return render.bounds.min.y - Math.random() * height * 2;
+}
+
+let raindrops = [];
+for (var i=0; i<500; i++) {
+  raindrops.push(new Circle(rainx(), rainy(), 4))
+}
+
+let score = 0;
+Events.on(render, 'beforeRender', event => {
+  raindrops.forEach(rd => {
+    if (rd.pos().y > height + 100)
+      Body.setPosition(rd.body, {x: rainx(), y: rainy()})
+  })
 })

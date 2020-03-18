@@ -49,48 +49,7 @@ function constraint(bodyA, bodyB, options) {
 }
 
 
-// -------------------------------------------
 
-//let ground = new Rect(centerx, height-30, width*100, 60, {
-//  isStatic: true,
-//  friction: 0.7
-//})
-
-// ground blocks
-let minx = -500;
-let maxx = width + 5000;
-for (var x=-500; x<width+5000; x+=300) {
-  let r = new Rect(x, height-30, 150, 60, {isStatic: true})
-//  Body.rotate(r.body, 0.3)
-}
-
-//// make some bodies (shapes)
-//let bodies = [
-//    Bodies.rectangle(startx(), starty, 80, 80),
-//    Bodies.circle(startx(), starty+10, 40, 10),
-//    Bodies.circle(startx(), starty, 40, 10)
-//  ]
-//add(bodies);
-
-function rainx() {
-  return render.bounds.min.x + Math.random() * width;
-}
-function rainy() {
-  return render.bounds.min.y - Math.random() * height * 2;
-}
-
-let raindrops = [];
-for (var i=0; i<500; i++) {
-  raindrops.push(new Circle(rainx(), rainy(), 4))
-}
-
-let score = 0;
-Events.on(render, 'beforeRender', event => {
-  raindrops.forEach(rd => {
-    if (rd.pos().y > height + 100)
-      Body.setPosition(rd.body, {x: rainx(), y: rainy()})
-  })
-})
 
 // -------------------------------------------
 
@@ -125,6 +84,7 @@ function Circle(x, y, r, options) {
   this.body = Bodies.circle(x, y, r, options);
   add(this);
   this.hw = r;
+  this.hh = r;
   this.pos = () => this.body.position;
 }
 function Rect(x, y, w, h, options) {
