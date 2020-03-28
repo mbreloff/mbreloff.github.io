@@ -9,17 +9,18 @@ let Engine = Matter.Engine,
 let engine = Engine.create(),
     world = engine.world,
     width = window.innerWidth-1,
-    height = window.innerHeight-1,
-    render = Render.create({
-          element: document.body,
-          engine: engine,
-          options: {
-            width: width, 
-            height: height,
-//            background: 'rgba(0,0,0,0)',
-            wireframes: false
-          }});
-console.log(render)
+    height = window.innerHeight-1;
+
+// let render = Render.create({
+//           element: document.body,
+//           engine: engine,
+//           options: {
+//             width: width, 
+//             height: height,
+// //            background: 'rgba(0,0,0,0)',
+//             wireframes: false
+//           }});
+// console.log(render)
 
 // some helpers for coordinates
 let centerx = width/2,
@@ -62,22 +63,21 @@ window.onkeydown = e => {
 }
 
 // start the simulation
-Engine.run(engine);
-Render.run(render);
+// Engine.run(engine);
+// Render.run(render);
 
 
-
-function applyForceX(body, force) {
+function applyForce(body, forcex, forcey) {
   Body.applyForce(
     body, 
     body.position, 
-    {x: force, y: 0});
+    {x: forcex, y: forcey});
+}
+function applyForceX(body, force) {
+  applyForce(body, force, 0)
 }
 function applyForceY(body, force) {
-  Body.applyForce(
-    body, 
-    body.position, 
-    {x: 0, y: force});
+  applyForce(body, 0, force)
 }
 
 function Circle(x, y, r, options) {
