@@ -163,28 +163,41 @@ constraint(legUR, blockerR2, {
   pointB: {x: 0, y: 0}
 })
 
-let forceScale = 0.8
-let forceHead = 0.01 * forceScale
-let forceLeg = 0.03 * forceScale
-let forceArm = 0.002 * forceScale
-let forceLegLx = -0.02 * forceScale
-let forceLegLy = 0.10 * forceScale
-
-// controls with arrow keys
+let a = Math.PI/20;
+function rot(body, angle) {
+  Body.setAngularVelocity(body, angle)
+}
 keyMap.ArrowRight = () => {
-  applyForceX(legUR.body, forceLeg)
-  applyForceX(armR.body, -forceArm)
-  applyForceX(armL.body, forceArm)
-  applyForceX(head.body, forceHead)
-  applyForce(legLL.body, forceLegLx, forceLegLy)
+  rot(legUR.body, -a)
+  rot(legUL.body, a)
 }
 keyMap.ArrowLeft = () => {
-  applyForceX(legUL.body, forceLeg)
-  applyForceX(armL.body, -forceArm)
-  applyForceX(armR.body, forceArm)
-  applyForceX(head.body, forceHead)
-  applyForce(legLR.body, forceLegLx, forceLegLy)
+  rot(legUR.body, a)
+  rot(legUL.body, -a)
 }
+
+// let forceScale = 0.8
+// let forceHead = 0.01 * forceScale
+// let forceLeg = 0.03 * forceScale
+// let forceArm = 0.002 * forceScale
+// let forceLegLx = -0.02 * forceScale
+// let forceLegLy = 0.10 * forceScale
+
+// // controls with arrow keys
+// keyMap.ArrowRight = () => {
+//   applyForceX(legUR.body, forceLeg)
+//   applyForceX(armR.body, -forceArm)
+//   applyForceX(armL.body, forceArm)
+//   applyForceX(head.body, forceHead)
+//   applyForce(legLL.body, forceLegLx, forceLegLy)
+// }
+// keyMap.ArrowLeft = () => {
+//   applyForceX(legUL.body, forceLeg)
+//   applyForceX(armL.body, -forceArm)
+//   applyForceX(armR.body, forceArm)
+//   applyForceX(head.body, forceHead)
+//   applyForce(legLR.body, forceLegLx, forceLegLy)
+// }
 
 // -------------------------------------------
 
@@ -234,6 +247,12 @@ make3d('legUR', legUR, 'r')
 make3d('legLL', legLL, 'l')
 make3d('legLR', legLR, 'r')
 
+
+// add a point light source which will give shadows
+var pointLight2 = new THREE.PointLight( 0xffffff, 1 );
+pointLight2.position.set( 25, 20, 25 );
+scene.add( pointLight2 );
+
 // called on every frame
 function updateScene() {
   // // make the cubes rotate a little bit each frame
@@ -257,13 +276,14 @@ function updateScene() {
   camera.lookAt(chest.body.position.x, -chest.body.position.y, 0)
 
   pointLight.position.set( camera.position.x, -camera.position.y, camera.position.z );
+  pointLight2.position.set( camera.position.x, 500-camera.position.y, camera.position.z );
 }
 
 // start the animation!
 let last_ts = undefined;
 function animate() {
   requestAnimationFrame( animate );
-  
+
   let now = Date.now()
   let delta = last_ts ? 0 : now-last_ts;
   last_ts = now;
